@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import Message from './Message';
@@ -18,6 +18,10 @@ function App() {
   //   // if we have a variable like input, it runs every time input changes
   // }, []) //condition
 
+  useEffect(() => {
+    setUsername(prompt('enter your name'))
+  }, [])
+
   console.log(input);
   console.log(messages);
 
@@ -32,7 +36,7 @@ function App() {
   return (
     <div className="App">
       <h1>hello!!</h1>
-      {/* <h2>welcome {username}</h2> */}
+      <h2>welcome {username}</h2>
       <form>
         <FormControl>
           <InputLabel>Enter a message...</InputLabel>
