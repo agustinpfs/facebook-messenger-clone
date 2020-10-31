@@ -20,9 +20,7 @@ function App() {
   //   // if we have a variable like input, it runs every time input changes
   // }, []) //condition
 
-  useEffect(() => {
-    setUsername(prompt('enter your name'))
-  }, [])
+∫
 
   console.log(input);
   console.log(messages);
@@ -51,11 +49,11 @@ function App() {
 
     {
 
-    messages.map(messages => 
+    messages.map(message => 
       // <p>{messages}</p>
       // <Message text={messages} />
       // <Message username={messages.username} text={messages.text} />
-      <Message username={username} messages={messages} />
+      <Message username={username} message={message} />
     )
     
     }
