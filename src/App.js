@@ -6,7 +6,9 @@ import Message from './Message';
 
 function App() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState(['hola', 'hey']);
+  const [messages, setMessages] = useState([
+    {username: "agux", text: "hey guys"},
+    {username: "agux", text: "hey guys"},{}]);
   const [username, setUsername] = useState('');
 
   // useState = variable in React
@@ -29,7 +31,7 @@ function App() {
   const sendMessage = (event) => {
     event.preventDefault();
     // all the logic to send a message goes 
-    setMessages([...messages, input]);
+    setMessages([...messages, {username: username, text: input}]);
     setInput('');
   }
 
@@ -47,10 +49,14 @@ function App() {
       {/* messages themselves */}
 
     {
-    messages.map(messages => 
+
+    messages.map(messages => (
       // <p>{messages}</p>
-      <Message text={messages} />
-      )}
+      // <Message text={messages} />
+      <Message username={messages.username} text={messages.text} />
+    ))
+    
+    }
 
     </div>
   );
