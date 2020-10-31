@@ -8,7 +8,7 @@ function App() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     {username: "agux", text: "hey guys"},
-    {username: "agux", text: "hey guys"},{}]);
+    {username: "agux", text: "hey guys"}]);
   const [username, setUsername] = useState('');
 
   // useState = variable in React
@@ -45,16 +45,18 @@ function App() {
           <Input value={input} onChange={event => setInput(event.target.value)} />
           <Button disabled={!input} variant="contained" color="primary" type="submit" onClick={sendMessage}>Send message</Button>
         </FormControl>
-      </form>
+      </form> 
+      {/* wrapped in form tag and add type="submit in Button tag enable "Enter key" and submit" */}
       {/* messages themselves */}
 
     {
 
-    messages.map(messages => (
+    messages.map(messages => 
       // <p>{messages}</p>
       // <Message text={messages} />
-      <Message username={messages.username} text={messages.text} />
-    ))
+      // <Message username={messages.username} text={messages.text} />
+      <Message username={username} messages={messages} />
+    )
     
     }
 
