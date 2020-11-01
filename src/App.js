@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import Message from './Message';
+import db from './firebase.js';
+import firebase from 'firebase';
 
 
 function App() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([
-    {username: "agux", text: "hey guys"},
-    {username: "agux", text: "hey guys"}]);
+  const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState('');
 
   // useState = variable in React
@@ -20,16 +20,35 @@ function App() {
   //   // if we have a variable like input, it runs every time input changes
   // }, []) //condition
 
-∫
+  useEffect(() => { //show db
+    db.collection('messages')
+    .orderBy('timestamp', 'desc')
+    .onSnapshot(snapshot => {
+      setMessages(snapshot.docs.map(doc => doc.data()))
+    })
+  }, [])
+
+  useEffect(() => {
+    setUsername(prompt('enter your name'))
+  }, [])
 
   console.log(input);
   console.log(messages);
 
 
   const sendMessage = (event) => {
-    event.preventDefault();
     // all the logic to send a message goes 
-    setMessages([...messages, {username: username, text: input}]);
+    event.preventDefault();
+
+    db.collection('messages').add({
+      message: input,
+      username: username,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp() //timestamp according server time zone
+       
+    })
+
+    // comment because add above code firebase
+    // setMessages([...messages, {username: username, text: input}]);
     setInput('');
   }
 
